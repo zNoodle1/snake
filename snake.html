@@ -11,6 +11,7 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      flex-direction: column;
     }
     
     #game-board {
@@ -31,19 +32,27 @@
     .food {
       background-color: #FFC107;
     }
+
+    #score {
+      margin-top: 10px;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
+  <div id="score">Score: 0</div>
   <div id="game-board"></div>
   <script>
     const boardSize = 20;
     const initialSnakeLength = 3;
 
     const gameBoard = document.getElementById('game-board');
+    const scoreDisplay = document.getElementById('score');
     let snake = [{ x: 10, y: 10 }];
     let direction = 'right';
     let nextDirection = 'right';
     let food = generateFood();
+    let score = 0;
 
     function createBoard() {
       for (let row = 0; row < boardSize; row++) {
@@ -108,6 +117,8 @@
       if (head.x === food.x && head.y === food.y) {
         clearFood();
         food = generateFood();
+        score++;
+        scoreDisplay.textContent = `Score: ${score}`;
       } else {
         snake.pop();
       }
@@ -121,7 +132,7 @@
     function gameLoop() {
       moveSnake();
       if (checkCollision()) {
-        alert('Game over!');
+        alert(`Game over! Your score is ${score}`);
         resetGame();
       }
       drawSnake();
@@ -135,6 +146,8 @@
       nextDirection = 'right';
       clearFood();
       food = generateFood();
+      score = 0;
+      scoreDisplay.textContent = `Score: ${score}`;
     }
 
     window.addEventListener('keydown', (event) => {
