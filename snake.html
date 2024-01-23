@@ -40,7 +40,7 @@
   </style>
 </head>
 <body>
-  <div id="score">Score!!: 0</div>
+  <div id="score">Score: 0</div>
   <div id="game-board"></div>
   <script>
     const boardSize = 20;
@@ -118,7 +118,7 @@
         clearFood();
         food = generateFood();
         score++;
-        scoreDisplay.textContent = `Score!!: ${score}`;
+        scoreDisplay.textContent = `Score: ${score}`;
       } else {
         snake.pop();
       }
@@ -147,7 +147,7 @@
       clearFood();
       food = generateFood();
       score = 0;
-      scoreDisplay.textContent = `Score!!: ${score}`;
+      scoreDisplay.textContent = `Score: ${score}`;
     }
 
     window.addEventListener('keydown', (event) => {
